@@ -38,22 +38,32 @@
             <div class="container px-4">
                 <div class="row gx-4 justify-content-center">
                     <div class="col-lg-8">
-                        <h2>Q1 : Containers vs VMs</h2>
-                        <p class="lead">Containers vs VMs differences are pasted below</p>
+                        <h2>Q1 : How to leverage cache using Dockerfiles</h2>
+                        <p class="lead">points are pasted below</p>
                         <ul>
-                            <li>Hardware-level process isolation</li>
-                            <li>Each VM has a separate OS</li>
-                            <li>Boots in minutes</li>
-                            <li>VMs are of few GBs</li>
-			    <li>Ready-made VMs are difficult to find</li>
-			    <h2>VS</h2>
-                            <li>OS level process isolation</li>
-                            <li>Each container can share OS</li>
-                            <li>Boots in seconds</li>
-                            <li>Containers are lightweight (KBs/MBs)</li>
+                            <li>When executing docker build the first line of output typically reads "Sending build context to Docker deamon . . ." The build context constitutes everything in your build directory (the directory that you pass to the docker build command) and is used by Docker so that you can inject local files into your image using the ADD and COPY instructions.</li>
+                            <li>This is the one place where the caching rules change slightly -- in addition to looking at the instruction and the parent image, Docker will also check to see if the file(s) being copied have changed.</li>
+			    <h2>Bust the Cache</h2>
+                            <li>For the most part, the image cache is incredibly helpful and can save you a lot of time while building your images. However, there are times when the caching can bite you if you aren't paying attention, so it's good to know how to selectively bust the cache.</li>
                         </ul>
-			<h2>Q2 : Explain Docker Architecture</h2>
-                        <p class="lead">Docker architecture. Docker uses a client-server architecture. The Docker client talks to the Docker daemon, which does the heavy lifting of building, running, and distributing your Docker containers. The Docker client and daemon can run on the same system, or you can connect a Docker client to a remote Docker daemon.</p>
+			<h2>Q2 : What are multi-stage builds</h2>
+                        <p class="lead">Stages are pasted below</p>
+			<ul>
+                            <li>Here’s a multi-stage Dockerfile which encapsulates our entire build:</li>   
+			    <li>FROM node:14 AS sass</li>
+			    <li>WORKDIR /example</li>
+			    <li>RUN npm install -g node-sass</li>
+			    <li>COPY example.scss.</li>
+			    <li>RUN node-sass example.scss example.css</li>
+			    <li>FROM php:8.0-apache</li>
+			    <li>COPY --from=composer:2 /usr/bin/composer /usr/bin/composer</li>
+			    <li>COPY composer.json .</li>
+			    <li>COPY composer.lock .</li>
+			    <li>RUN composer install --no-dev</li>
+			    <li>COPY --from=sass /example/example.css example.css</li>
+			    <li>COPY index.php .</li>
+			    <li>COPY src/ src</li>
+                        </ul>
 			<h2>Q3 : Write command to create an nginx container in detached mode with name assignment-2 running on host port 9090 on a custom network named assignment-2</h2>
                         <p class="lead">docker container run -it -d --publish 9090:80 --name assignment-2 nginx</p>
 
