@@ -64,13 +64,12 @@
 			    <li>COPY index.php .</li>
 			    <li>COPY src/ src</li>
                         </ul>
-			<h2>Q3 : Write command to create an nginx container in detached mode with name assignment-2 running on host port 9090 on a custom network named assignment-2</h2>
-                        <p class="lead">docker container run -it -d --publish 9090:80 --name assignment-2 nginx</p>
+			<h2>Q3 : Explain containers vs Image</h2>
+                        <p class="lead">Images can exist without containers, whereas a container needs to run an image to exist. Therefore, containers are dependent on images and use them to construct a run-time environment and run an application.
 
-			<h2>Q4 : Write command to see logs of any container</h2>
-                        <p class="lead">docker container log assignment-2</p>
-			<h2>Q5 : Write commands to Exec into the container and cat the output</h2>
-			<p class="lead">docker container exec -it assignment-2 cat /usr/share/nginx/html/index.html</p>
+The two concepts exist as essential components (or rather phases) in the process of running a Docker container.</p>
+			<h2>Q4 : Explain RUN vs CMD vs Entrypoint</h2>
+			<p class="lead">If you want to specify default arguments and want it to be overwritten on specifying CLI arguments, use CMD commands. And if you want to run a container with the condition that a particular command is always executed, use ENTRYPOINT. RUN is simply used to build additional image layers over the base image.</p>
                     </div>
                 </div>
             </div>
@@ -81,8 +80,8 @@
                 <div class="row gx-4 justify-content-center">
                     <div class="col-lg-8">
                         <h2>Assignment completed</h2>
-                        <p class="lead">Completion date - 26 February 2022</p>
-			<p class="lead">3:00 AM PKT</p>
+                        <p class="lead">Completion date - 10 March 2022</p>
+			<p class="lead">11:30 PM PKT</p>
                     </div>
                 </div>
             </div>
